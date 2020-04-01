@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="GTA5_Keybinder_Bonnyfication.Views.Menue.UC_MainMenue"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GTA5_Keybinder_Bonnyfication.Views.Menue"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1280" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="MyImageButton">
+            <Style.Resources>
+                <Storyboard x:Key="OnClick1">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="{x:Null}">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="2"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="{x:Null}">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="2"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+            </Style.Resources>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="ButtonBase.PreviewMouseLeftButtonDown">
+                    <BeginStoryboard x:Name="OnClick1_BeginStoryboard" Storyboard="{StaticResource OnClick1}"/>
+                </EventTrigger>
+            </Style.Triggers>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="MinWidth" Value="20"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Name="Border"  
+                        CornerRadius="2" 
+                        BorderThickness="0"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="#404040">
+                            <ContentPresenter Margin="2" 
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" 
+                                      RecognizesAccessKey="True"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush Stretch="None"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="1*"/>
+
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="40" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" Margin="5 0 0 5">
+            <Label Content="Status:" FontSize="14" Foreground="White" VerticalAlignment="Bottom" />
+            <Label Content="{Binding Status_Keybinder,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,FallbackValue=Test}" FontSize="14" Foreground="White" VerticalAlignment="Bottom" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="25" Grid.Row="6" Grid.Column="4" Margin="0 0 5 5">
+            <Image Source="/GTA5_Keybinder_Bonnyfication;component/Resources/Version.png" Margin="0,5,0,0"/>
+            <Label Content="1.0.0.11 BETA" FontSize="12" Foreground="White" VerticalAlignment="Bottom" />
+            <!--{Binding version,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,TargetNullValue=1.0.0.6}-->
+        </StackPanel>
+
+        <Image Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5" Margin="0" Source="/GTA5_Keybinder_Bonnyfication;component/Resources/Heading.png"/>
+
+        <Button Grid.Column="1" Grid.Row="3" Margin="30"  Style="{DynamicResource MyImageButton}" Command="{Binding Command_Button_Keybinds}">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="20" />
+            </Button.Effect>
+            <Image Source="/GTA5_Keybinder_Bonnyfication;component/Resources/keybinds.png" />
+        </Button>
+
+        <Button Grid.Column="3" Grid.Row="3"  Margin="30"  Style="{DynamicResource MyImageButton}" Command="{Binding Command_Button_Not_Implemented}">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="20" />
+            </Button.Effect>
+            <Image Source="/GTA5_Keybinder_Bonnyfication;component/Resources/Berufe.png" />
+        </Button>
+
+
+
+        <Button Grid.Column="5" Grid.ColumnSpan="1" Margin="30"  Grid.Row="3" Style="{DynamicResource MyImageButton}" Command="{Binding Command_Button_Feedback}">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="20" />
+            </Button.Effect>
+            <Image Source="/GTA5_Keybinder_Bonnyfication;component/Resources/Feedback.png" />
+        </Button>
+
+
+        <Button Grid.Column="1" Grid.Row="5" Margin="30"  Style="{DynamicResource MyImageButton}" Command="{Binding Command_Button_Whitelist}">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="20" />
+            </Button.Effect>
+            <Image Source="/GTA5_Keybinder_Bonnyfication;component/Resources/whitelistadd.png" />
+        </Button>
+
+        <Button Grid.Column="3" Grid.Row="5" Margin="30"  Style="{DynamicResource MyImageButton}" Command="{Binding Command_Button_Einstellungen}">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="20" />
+            </Button.Effect>
+            <Image Source="/GTA5_Keybinder_Bonnyfication;component/Resources/Einstellungen.png" />
+        </Button>
+
+    </Grid>
+</UserControl>
